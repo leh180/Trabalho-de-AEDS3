@@ -1,4 +1,4 @@
-##🎁 PresenteFácil 1.0 🎁
+## 🎁 PresenteFácil 1.0 🎁
 
 _🧠 Algoritimos e Estrutura de Dados III — Trabalho Prático 01_
 
@@ -19,7 +19,7 @@ O **PresenteFácil** foi criado para simplificar a vida de quem quer centralizar
 * Miguel Pessoa Lima Ferreira
 
 ---
-### 📽 Link para o vídeo de demonstração na Integra:
+### 🎥 Link para o vídeo de demonstração na Integra:
 
 [VideoTP1](https://www.youtube.com)
 
