@@ -34,24 +34,31 @@ O **PresenteFácil** foi criado para simplificar a vida de quem quer centralizar
 Abaixo estão as principais telas do sistema.
 
 *Tela de Login de Usuário
+
 ![Tela Login](imagens/TelaLogin.png)
 
 *Tela de Cadastro de Usuário
+
 ![Cadastro](imagens/Cadastro.png)
 
 *Menu Principal
+
 ![Tela Inicial](imagens/TelaInical.png)
 
 *Tela de criação de Lista
+
 ![Criar Lista](imagens/CriarLista.png) 
 
 *Exibição de Listas do Usuário
+
 ![Minhas Listas](imagens/MinhasListas.png)
 
 *Tela de Compartilhamento por NanoID
-![Listas Outros](imagens/ListaOutro.png)
+
+![Listas Outros](imagens/ListasOutro.png)
 
 *Tela de Exibição dos Dados do Usuário
+
 ![Meus Dados](imagens/TelaDados.png) 
 
 ---
@@ -59,25 +66,25 @@ Abaixo estão as principais telas do sistema.
 
 O sistema foi estruturado por meio de diversas classes, as principais são:
 
-* '''Usuario : A classe representa a entidade "Usuário" no sistema. Ela cria o usuario, aplica HashExtensivel na senha e implementa a a interface 'Entidade' para ser compatível com o sistema de arquivos genérico
+* ***Usuario***: A classe representa a entidade "Usuário" no sistema. Ela cria o usuario, aplica HashExtensivel na senha e implementa a a interface 'Entidade' para ser compatível com o sistema de arquivos genérico
   
-* CRUDUsuario: A classe CRUDUsuario estende a classe genérica Arquivo e gere todas as operações de persistência para a entidade Usuário. Ela mantém um índice secundário por e-mail (Hash Extensível) para acelerar as buscas e o processo de login.
+* ***CRUDUsuario***: A classe CRUDUsuario estende a classe genérica Arquivo e gere todas as operações de persistência para a entidade Usuário. Ela mantém um índice secundário por e-mail (Hash Extensível) para acelerar as buscas e o processo de login.
   
-* Lista : A classe representa a entidade "Lista de Presentes" no sistema. Ela implementa a interface 'Entidade' para ser compatível com o sistema de arquivos genérico e 'Comparable' para permitir a ordenação alfabética das listas pelo nome.
+* ***Lista***: A classe representa a entidade "Lista de Presentes" no sistema. Ela implementa a interface 'Entidade' para ser compatível com o sistema de arquivos genérico e 'Comparable' para permitir a ordenação alfabética das listas pelo nome.
 
-*CRUDLista: A classe CRUDLista estende a classe genérica Arquivo e gere todas as operações de persistência para a entidade Lista. Ela mantém um índice secundário por código (Hash Extensível) para buscas públicas e um índice de relacionamento (Árvore B+) para ligar utilizadores às suas listas.
+* ***CRUDLista***: A classe CRUDLista estende a classe genérica Arquivo e gere todas as operações de persistência para a entidade Lista. Ela mantém um índice secundário por código (Hash Extensível) para buscas públicas e um índice de relacionamento (Árvore B+) para ligar utilizadores às suas listas.
 
-* ControleLista: A classe é responsável por gerir toda a lógica de negócio relacionada às listas, atuando como o intermediário entre as classes de modelo (dados) e as classes de visão (interface com o utilizador).
+* ***ControleLista***: A classe é responsável por gerir toda a lógica de negócio relacionada às listas, atuando como o intermediário entre as classes de modelo (dados) e as classes de visão (interface com o utilizador).
   
-* ControlePrincipal: A classe é o ponto de entrada da aplicação. Ela é responsável por orquestrar o fluxo principal do sistema, gerindo o login, a criação de utilizadores e o acesso aos menus de funcionalidades após a autenticação.
+* ***ControlePrincipal***: A classe é o ponto de entrada da aplicação. Ela é responsável por orquestrar o fluxo principal do sistema, gerindo o login, a criação de utilizadores e o acesso aos menus de funcionalidades após a autenticação.
   
-* ControleUsuario: A classe 'ControleUsuario' é responsável por gerenciar toda a lógica de negócio relacionada aos usuários, como autenticação, cadastro e gerenciamento de perfil. Ela atua como um mediador entre as classes de persistência (CRUD) e a interface com o usuário (VisaoUsuario).
+* ***ControleUsuario***: A classe 'ControleUsuario' é responsável por gerenciar toda a lógica de negócio relacionada aos usuários, como autenticação, cadastro e gerenciamento de perfil. Ela atua como um mediador entre as classes de persistência (CRUD) e a interface com o usuário (VisaoUsuario).
   
-* Arquivo: classe de tipo genérico para salvar os registros.
+* ***Arquivo***: classe de tipo genérico para salvar os registros.
   
-* ArvoreBMais: classe que implementa uma árvore B+ para índice no relacionamento 1:N.
+* ***ArvoreBMais***: classe que implementa uma árvore B+ para índice no relacionamento 1:N.
   
-* HashExtensivel: classe que implementa uma tabela HashExtensivel.
+* ***HashExtensivel***: classe que implementa uma tabela HashExtensivel.
   
 ---
 
