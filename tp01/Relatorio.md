@@ -45,4 +45,13 @@ O sistema foi desenvolvido com uma arquitetura robusta para garantir a seguranç
 |---------|------|
 |Há um CRUD de usuários (que estende a classe ArquivoIndexado, acrescentando Tabelas Hash Extensíveis e Árvores B+ como índices diretos e indiretos conforme necessidade) que funciona corretamente?|[✅]|
 |Há um CRUD de listas (que estende a classe ArquivoIndexado, acrescentando Tabelas Hash Extensíveis e Árvores B+ como índices diretos e indiretos conforme necessidade) que funciona corretamente?|[✅]|
+|As listas de presentes estão vinculadas aos usuários usando o idUsuario como chave estrangeira?|[✅]|
+|Há uma árvore B+ que registre o relacionamento 1:N entre usuários e listas?|[✅]|
+|Há um CRUD de usuários (que estende a classe ArquivoIndexado, acrescentando Tabelas Hash Extensíveis e Árvores B+ como índices diretos e indiretos conforme necessidade)?|[✅]|
+|Há uma visualização das listas de outras pessoas por meio de um código NanoID?|[✅]|
+|O trabalho compila corretamente?|[✅]|
+|O trabalho está completo e funcionando sem erros de execução?|[✅]|
+|O trabalho é original e não a cópia de um trabalho de outro grupo?|[✅]|
+
+
 
