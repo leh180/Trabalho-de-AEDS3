@@ -1,5 +1,5 @@
 # Trabalho-de-AEDS3
-<h1 align="center">🎁 PresenteFácil 1.0 🎁</h1>
+<h2 align="center">🎁 PresenteFácil 1.0 🎁</h2>
 
 <p align="center">
   O seu sistema de listas de presentes para todas as ocasiões!
