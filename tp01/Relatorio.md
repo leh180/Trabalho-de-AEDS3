@@ -29,6 +29,22 @@ O **PresenteFácil** foi criado para simplificar a vida de quem quer centralizar
 
 ---
 
+### 📸 Principais Telas
+
+![Tela Login](imagens/TelaLogin.png)
+
+![Cadastro](imagens/Cadastro.png)
+
+![Tela Inicial](imagens/TelaInicial.png)
+
+![Criar Lista](imagens/CriarLista.png) 
+
+![Minhas Listas](imagens/MinhasListas.png)
+
+![Listas Outros](imagens/ListaOutros.png)
+
+![Meus Dados](imagens/TelaDados.png) 
+
 ### ✅ Checklist
 
 |Requisito|Status|
