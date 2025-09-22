@@ -19,12 +19,20 @@ O **PresenteFácil** foi criado para simplificar a vida de quem quer centralizar
 * Miguel Pessoa Lima Ferreira
 
 ---
+### 📽 Link para o vídeo de demonstração na Integra:
+
+[VideoTP1](https://www.youtube.com)
+
+---
 
 ### 🚀 Funcionalidades Principais
 
 * **Cadastro e Autenticação de Usuários**: Para usar o sistema, o usuário deve se cadastrar com nome, e-mail e uma senha (armazenada em formato de hash para segurança). O acesso é feito via e-mail e senha. Existe um mecanismo de recuperação de senha por meio de uma pergunta e resposta secretas.
+
 * **Criação de Listas de Presentes**: Um usuário pode criar múltiplas listas, cada uma com um nome, descrição e, opcionalmente, uma data limite. Cada lista é vinculada a um único usuário.
+  
 * **Visualização e Compartilhamento**: Cada lista gerada possui um código compartilhável único e alfanumérico. Esse código permite que o criador da lista a compartilhe com outras pessoas, que poderão visualizar o conteúdo.
+  
 * **Gerenciamento de Listas**: Os usuários podem visualizar todas as suas listas cadastradas, alterar seus dados (nome, descrição, data limite) ou excluí-las. A navegação é intuitiva, utilizando menus textuais e um "rastro" (breadcrumb) para indicar a localização do usuário no sistema.
 
 ---
@@ -33,31 +41,31 @@ O **PresenteFácil** foi criado para simplificar a vida de quem quer centralizar
 
 Abaixo estão as principais telas do sistema.
 
-*Tela de Login de Usuário
+* Tela de Login de Usuário:
 
 ![Tela Login](imagens/TelaLogin.png)
 
-*Tela de Cadastro de Usuário
+* Tela de Cadastro de Usuário:
 
 ![Cadastro](imagens/Cadastro.png)
 
-*Menu Principal
+* Menu Principal:
 
 ![Tela Inicial](imagens/TelaInical.png)
 
-*Tela de criação de Lista
+* Tela de criação de Lista:
 
 ![Criar Lista](imagens/CriarLista.png) 
 
-*Exibição de Listas do Usuário
+* Exibição de Listas do Usuário:
 
 ![Minhas Listas](imagens/MinhasListas.png)
 
-*Tela de Compartilhamento por NanoID
+* Tela de Compartilhamento por NanoID:
 
 ![Listas Outros](imagens/ListasOutro.png)
 
-*Tela de Exibição dos Dados do Usuário
+* Tela de Exibição dos Dados do Usuário:
 
 ![Meus Dados](imagens/TelaDados.png) 
 
