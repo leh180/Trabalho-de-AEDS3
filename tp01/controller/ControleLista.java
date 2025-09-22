@@ -1,12 +1,13 @@
 package controller;
+
 import java.util.*;
 import model.*;
 import view.*;
 
 /**
- * A classe 'ControleLista' é responsável por gerenciar toda a lógica de negócio
+ * A classe 'ControleLista' é responsável por gerir toda a lógica de negócio
  * relacionada às listas, atuando como o intermediário entre as classes de modelo (dados)
- * e as classes de visão (interface com o usuário).
+ * e as classes de visão (interface com o utilizador).
  */
 public class ControleLista {
 
@@ -16,14 +17,13 @@ public class ControleLista {
     private VisaoLista visaoLista;
     private VisaoUsuario visaoUsuario;
 
-    // ------------------------------------------ Construtores ------------------------------------------
+    // ------------------------------------------ Construtor ------------------------------------------
     
-    public ControleLista() throws Exception {
-        this.crudLista = new CRUDLista();
-        this.visaoLista = new VisaoLista();
-        this.visaoUsuario = new VisaoUsuario();
-    }
-
+    /**
+     * Construtor que recebe a instância de CRUDLista (Injeção de Dependência).
+     * Garante que toda a aplicação partilhe a mesma ligação com os ficheiros.
+     * @param crudLista A instância de CRUD para as listas.
+     */
     public ControleLista(CRUDLista crudLista) {
         this.crudLista = crudLista;
         this.visaoLista = new VisaoLista();
@@ -35,8 +35,8 @@ public class ControleLista {
     /**
      * Menu principal para um utilizador gerir as suas próprias listas.
      * Este método é o ponto de entrada para a gestão de listas pessoais.
-     * Ele lê todas as listas do usuário, as exibe de forma ordenada e
-     * direciona para as ações de criação ou gerenciamento de uma lista específica.
+     * Ele lê todas as listas do utilizador, exibe-as de forma ordenada e
+     * direciona para as ações de criação ou gestão de uma lista específica.
      * @param usuarioLogado O utilizador que está com a sessão ativa.
      */
     public void menuMinhasListas(Usuario usuarioLogado) {
@@ -44,49 +44,52 @@ public class ControleLista {
         do {
             try {
                 List<Lista> minhasListas = crudLista.readAllByUser(usuarioLogado.getID());
+                // Ordena as listas por ordem alfabética do nome, ignorando maiúsculas/minúsculas.
                 Collections.sort(minhasListas, Comparator.comparing(Lista::getNome, String.CASE_INSENSITIVE_ORDER));
-                opcao = visaoLista.mostrarListas(minhasListas, usuarioLogado.getNome());
-
-                if (opcao.equalsIgnoreCase("N")) {
+                
+                // Lê a opção do utilizador e converte-a imediatamente para minúsculas.
+                opcao = visaoLista.mostrarListas(minhasListas, usuarioLogado.getNome()).toLowerCase();
+                
+                // Agora, todas as comparações são feitas com a versão em minúsculas.
+                if (opcao.equals("n")) {
                     criarNovaLista(usuarioLogado);
-                } else if (!opcao.equalsIgnoreCase("R")) {
+                } else if (!opcao.equals("r")) {
                     try {
                         int indice = Integer.parseInt(opcao) - 1;
                         if (indice >= 0 && indice < minhasListas.size()) {
-                            // Se o utilizador escolheu uma lista válida, mostra o menu de detalhes
                             menuDetalhesLista(minhasListas.get(indice), usuarioLogado);
                         } else {
-                            System.out.println("\nERRO: Opção numérica inválida!");
+                            visaoUsuario.mostrarMensagem("\nERRO: Opção numérica inválida!");
                             visaoUsuario.pausa();
                         }
                     } catch (NumberFormatException e) {
-                        System.out.println("\nERRO: Opção inválida! Tente novamente.");
+                        visaoUsuario.mostrarMensagem("\nERRO: Opção inválida! Tente novamente.");
                         visaoUsuario.pausa();
                     }
                 }
             } catch (Exception e) {
-                System.err.println("\nERRO ao gerir as listas: " + e.getMessage());
+                visaoUsuario.mostrarMensagem("\nERRO ao gerir as listas: " + e.getMessage());
                 e.printStackTrace();
-                opcao = "R"; // Força a saída em caso de erro grave
+                opcao = "r"; // Força a saída em caso de erro grave.
             }
-        } while (!opcao.equalsIgnoreCase("R"));
+        } while (!opcao.equals("r")); // A comparação é feita com 'r' minúsculo.
     }
 
     /**
      * Menu para ver os detalhes de uma lista específica e geri-la.
-     * Este método exibe os detalhes de uma lista e oferece opções
-     * para alteração ou exclusão, além de um espaço para futuras funcionalidades.
      * @param lista A lista selecionada.
      * @param usuarioLogado O utilizador dono da lista.
      */
     private void menuDetalhesLista(Lista lista, Usuario usuarioLogado) {
         String opcao;
         do {
-            opcao = visaoLista.mostrarDetalhesLista(lista, usuarioLogado.getNome(), true); // true = mostrar menu de gestão
+            // A CORREÇÃO ESTÁ AQUI: Adicionamos .trim() para remover espaços
+            // e garantimos que a conversão para minúsculas acontece sempre.
+            opcao = visaoLista.mostrarDetalhesLista(lista, usuarioLogado.getNome(), true).trim().toLowerCase();
             
             switch (opcao) {
                 case "1":
-                    System.out.println("\nFuncionalidade a ser implementada no Trabalho Prático 2.");
+                    visaoUsuario.mostrarMensagem("\nFuncionalidade a ser implementada no Trabalho Prático 2.");
                     visaoUsuario.pausa();
                     break;
                 case "2":
@@ -94,36 +97,35 @@ public class ControleLista {
                     break;
                 case "3":
                     if (excluirLista(lista)) {
-                        return; // Retorna para o menu "Minhas Listas"
+                        return; // Sai imediatamente do método se a lista for excluída
                     }
                     break;
-                case "R":
-                    break; // Retorna para o menu "Minhas Listas"
+                case "r":
+                    // Não faz nada, apenas permite que a condição do loop termine a execução
+                    break;
                 default:
-                    System.out.println("\nOpção inválida!");
+                    visaoUsuario.mostrarMensagem("\nOpção inválida!");
                     visaoUsuario.pausa();
                     break;
             }
 
-        } while (!opcao.equalsIgnoreCase("R"));
+        } while (!opcao.equals("r")); // A condição de saída do loop está correta
     }
 
     /**
      * Fluxo para procurar uma lista pública usando o seu código.
-     * Este método solicita um código de lista ao usuário e busca por
-     * uma lista correspondente no sistema, exibindo seus detalhes se encontrada.
      */
     public void menuProcurarLista() {
         String codigo = visaoLista.pedirCodigo();
         try {
             Lista lista = crudLista.readByCodigo(codigo);
             if (lista != null) {
-                visaoLista.mostrarDetalhesLista(lista, "Pública", false);
+                visaoLista.mostrarDetalhesLista(lista, "Não revelado", false);
             } else {
-                System.out.println("\nNenhuma lista encontrada com o código \"" + codigo + "\".");
+                visaoUsuario.mostrarMensagem("\nNenhuma lista encontrada com o código \"" + codigo + "\".");
             }
         } catch (Exception e) {
-            System.err.println("\nERRO ao procurar a lista: " + e.getMessage());
+            visaoUsuario.mostrarMensagem("\nERRO ao procurar a lista: " + e.getMessage());
         }
         visaoUsuario.pausa();
     }
@@ -132,27 +134,23 @@ public class ControleLista {
 
     /**
      * Realiza o processo de criação de uma nova lista.
-     * Pede os dados da nova lista ao usuário, associa-a ao usuário logado e
-     * salva a lista no sistema.
-     * @param usuarioLogado O utilizador que está criando a lista.
+     * @param usuarioLogado O utilizador que está a criar a lista.
      */
     private void criarNovaLista(Usuario usuarioLogado) {
         try {
             Lista novaLista = visaoLista.lerDadosNovaLista();
-            novaLista.setIdUsuario(usuarioLogado.getID()); // Associa a lista ao utilizador logado
+            novaLista.setIdUsuario(usuarioLogado.getID());
             
             int id = crudLista.create(novaLista);
-            System.out.println("\nLista \"" + novaLista.getNome() + "\" criada com sucesso! (ID: " + id + ")");
+            visaoUsuario.mostrarMensagem("\nLista \"" + novaLista.getNome() + "\" criada com sucesso! (ID: " + id + ")");
         } catch (Exception e) {
-            System.err.println("\nERRO ao criar a lista: " + e.getMessage());
+            visaoUsuario.mostrarMensagem("\nERRO ao criar a lista: " + e.getMessage());
         }
         visaoUsuario.pausa();
     }
 
     /**
      * Realiza o processo de alteração de uma lista existente.
-     * Pede os novos dados ao usuário, atualiza a lista no sistema e
-     * informa o resultado da operação.
      * @param lista A lista a ser alterada.
      */
     private void alterarLista(Lista lista) {
@@ -164,20 +162,18 @@ public class ControleLista {
             lista.setDataLimite(dadosAlterados.getDataLimite());
 
             if (crudLista.update(lista)) {
-                System.out.println("\nLista alterada com sucesso!");
+                visaoUsuario.mostrarMensagem("\nLista alterada com sucesso!");
             } else {
-                System.out.println("\nFalha ao alterar a lista.");
+                visaoUsuario.mostrarMensagem("\nFalha ao alterar a lista.");
             }
         } catch (Exception e) {
-            System.err.println("\nERRO ao alterar a lista: " + e.getMessage());
+            visaoUsuario.mostrarMensagem("\nERRO ao alterar a lista: " + e.getMessage());
         }
         visaoUsuario.pausa();
     }
 
     /**
      * Realiza o processo de exclusão de uma lista.
-     * Solicita a confirmação do usuário e, se confirmada,
-     * tenta excluir a lista do sistema.
      * @param lista A lista a ser excluída.
      * @return `true` se a lista foi excluída com sucesso, `false` caso contrário.
      */
@@ -185,14 +181,14 @@ public class ControleLista {
         if (visaoLista.confirmarExclusao(lista.getNome())) {
             try {
                 if (crudLista.delete(lista.getID())) {
-                    System.out.println("\nLista \"" + lista.getNome() + "\" excluída com sucesso.");
+                    visaoUsuario.mostrarMensagem("\nLista \"" + lista.getNome() + "\" excluída com sucesso.");
                     visaoUsuario.pausa();
                     return true;
                 } else {
-                    System.out.println("\nFalha ao excluir a lista.");
+                    visaoUsuario.mostrarMensagem("\nFalha ao excluir a lista.");
                 }
             } catch (Exception e) {
-                System.err.println("\nERRO ao excluir a lista: " + e.getMessage());
+                visaoUsuario.mostrarMensagem("\nERRO ao excluir a lista: " + e.getMessage());
             }
         }
         visaoUsuario.pausa();
