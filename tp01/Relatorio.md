@@ -23,7 +23,7 @@ O projeto foi construído em Java, utilizando um sistema de persistência de dad
 ---
 ### 🎥 Vídeo de Demonstração:
 
-[VideoTP1](https://www.youtube.com)
+[VideoTP1](https://youtu.be/IlUBODiJDhQ)
 
 ---
 
